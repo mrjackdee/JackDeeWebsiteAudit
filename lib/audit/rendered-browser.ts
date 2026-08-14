@@ -137,6 +137,18 @@ async function captureVariant(
   return { url, title, variant, snapshot: snapshot.slice(0, 18000), screenshotBase64 };
 }
 
+async function createBrowserSandbox() {
+  const snapshotId = process.env.AGENT_BROWSER_SNAPSHOT_ID;
+  if (snapshotId) {
+    return Sandbox.create({
+      source:{ type:'snapshot', snapshotId },
+      timeout:240_000,
+      persistent:false,
+    });
+  }
+  return Sandbox.create({ runtime:'node24', timeout:240_000, persistent:false });
+}
+
 export async function runRenderedBrowserAudit(
   pages: PageResult[],
   depth: 'quick' | 'standard' | 'deep',
@@ -156,11 +168,12 @@ export async function runRenderedBrowserAudit(
     };
   }
 
-  const sandbox = await Sandbox.create({ runtime: 'node24', timeout: 240_000, persistent: false });
+  const snapshotId = process.env.AGENT_BROWSER_SNAPSHOT_ID;
+  const sandbox = await createBrowserSandbox();
   const evidence: RenderedPageEvidence[] = [];
 
   try {
-    await installBrowser(sandbox);
+    if (!snapshotId) await installBrowser(sandbox);
     let index = 0;
     for (const page of selected) {
       evidence.push(await captureVariant(sandbox, page.url, 'desktop', index++));
