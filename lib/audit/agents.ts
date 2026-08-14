@@ -2,6 +2,7 @@ import type { Finding, PageResult, Priority } from '../types';
 
 export type AgentName =
   | 'Executive UI/UX Designer'
+  | 'Visual QA Designer'
   | 'Web Architect'
   | 'Senior Front-End Engineer'
   | 'QA Analyst'
