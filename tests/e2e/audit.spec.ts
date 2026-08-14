@@ -25,6 +25,16 @@ test('private network addresses are rejected in plain language', async ({ page }
   await expect(page.locator('.errorMessage')).toContainText('Private network addresses cannot be audited.');
 });
 
+test('a website can be audited without typing http or https', async ({ page }) => {
+  test.setTimeout(90000);
+  await page.goto('/');
+  await page.getByLabel('Website to audit').fill('example.com');
+  await page.getByLabel('Audit depth').selectOption('quick');
+  await page.getByRole('button', { name: 'Run website audit' }).click();
+  await expect(page.getByText('Audit complete')).toBeVisible({ timeout: 60000 });
+  await expect(page.getByRole('heading', { name: 'example.com' })).toBeVisible();
+});
+
 test('a public website audit completes and report exports work', async ({ page }) => {
   test.setTimeout(90000);
   await page.goto('/');
