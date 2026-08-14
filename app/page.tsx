@@ -183,7 +183,7 @@ export default function Home() {
           <div className="reportStats"><span><strong>{result.pagesChecked}</strong> pages checked</span><span><strong>{result.linksChecked}</strong> links checked</span><span><strong>{result.findings.length}</strong> findings</span><span><strong>{critical.length}</strong> launch blockers</span></div>
 
           {!!result.positives?.length && (
-            <section className="positivePanel"><div className="sectionHeading compact"><span className="kicker">What looks good</span><h2>Strengths worth preserving</h2></div><div className="positiveList">{result.positives.map((item,i)=><div key={i}><span>✓</span><p>{item}</p></div>)}</section>
+            <section className="positivePanel"><div className="sectionHeading compact"><span className="kicker">What looks good</span><h2>Strengths worth preserving</h2></div><div className="positiveList">{result.positives.map((item,i)=><div key={i}><span>✓</span><p>{item}</p></div>)}</div></section>
           )}
 
           <div className="sectionHeading"><span className="kicker">Prioritized findings</span><h2>What needs to change</h2><p>Each issue identifies who found it, what is wrong, why it matters, and exactly what to ask your vibe-coding tool to fix.</p></div>
