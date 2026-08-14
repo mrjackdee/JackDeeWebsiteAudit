@@ -36,6 +36,12 @@ type PageResult = {
   forms?: number;
 };
 
+type ExpertReview = {
+  aiEnhanced: boolean;
+  assessments: string[];
+  specialists: string[];
+};
+
 type AuditResult = {
   url: string;
   auditedAt: string;
@@ -47,6 +53,7 @@ type AuditResult = {
   summary: string;
   positives?: string[];
   coverage?: Coverage;
+  expertReview?: ExpertReview;
 };
 
 const scoreOrder = ['UI Design','User Experience','Mobile','Vibe-Code Quality','Accessibility','Security','SEO/AEO','Technical Quality','Performance','Production Readiness'];
@@ -124,7 +131,7 @@ export default function Home() {
               </select>
             </div>
           </div>
-          <p className="formNote">The app discovers routes from navigation, internal links, robots.txt, and XML sitemaps, then reviews every reachable page within the selected coverage tier. It does not submit purchases, deletes, messages, or other destructive actions.</p>
+          <p className="formNote">The app discovers routes from navigation, internal links, robots.txt, and XML sitemaps, reviews reachable pages within the selected tier, and sends the collected evidence to independent AI specialist agents. It does not submit purchases, deletes, messages, or other destructive actions.</p>
         </form>
         {error && <div className="errorMessage" role="alert"><strong>Audit stopped.</strong> {error}</div>}
       </section>
@@ -138,7 +145,7 @@ export default function Home() {
       )}
 
       {running && (
-        <section className="runningPanel" aria-live="polite"><div className="scanLine"/><div><span className="kicker">Multi-agent audit in progress</span><h2>Discovering and reviewing the complete public site</h2><p>Reading sitemaps and navigation, crawling internal routes, inventorying sections/forms/buttons, validating links, and running specialist quality reviews page by page.</p></div></section>
+        <section className="runningPanel" aria-live="polite"><div className="scanLine"/><div><span className="kicker">Multi-agent audit in progress</span><h2>Discovering and reviewing the complete public site</h2><p>Crawling pages and links, reviewing page structure and source evidence, then running independent AI specialist reviews before compiling the final remediation report.</p></div></section>
       )}
 
       {result && (
@@ -147,6 +154,14 @@ export default function Home() {
             <div><span className="kicker">Audit complete</span><h2>{new URL(result.url).hostname}</h2><p>{result.summary}</p></div>
             <div className="reportActions"><button onClick={downloadCsv}>Export CSV</button><button onClick={downloadJson}>Export JSON</button><button className="primaryButton" onClick={()=>{setResult(null);setUrl('');}}>New audit</button></div>
           </div>
+
+          {result.expertReview && (
+            <section className="coveragePanel">
+              <div className="sectionHeading compact"><span className="kicker">Expert review layer</span><h2>{result.expertReview.aiEnhanced ? 'Model-driven specialist review completed' : 'Deterministic specialist review completed'}</h2></div>
+              <p>{result.expertReview.aiEnhanced ? `${result.expertReview.specialists.length} independent AI specialist agents reviewed the site-wide evidence after the crawler completed.` : 'The site-wide deterministic checks completed, but the model-driven specialist layer was unavailable for this run. The report discloses that limitation rather than presenting it as AI-reviewed.'}</p>
+              {!!result.expertReview.assessments.length && <details className="limitations"><summary>Specialist assessments</summary>{result.expertReview.assessments.map((item,i)=><p key={i}>{item}</p>)}</details>}
+            </section>
+          )}
 
           {result.coverage && (
             <section className="coveragePanel">

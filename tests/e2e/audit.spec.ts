@@ -31,17 +31,19 @@ test('a website can be audited without typing http or https', async ({ page }) =
   await page.getByLabel('Website to audit').fill('example.com');
   await page.getByLabel('Audit coverage').selectOption('quick');
   await page.getByRole('button', { name: 'Run website audit' }).click();
-  await expect(page.getByText('Audit complete')).toBeVisible({ timeout: 90000 });
+  await expect(page.getByText('Audit complete', { exact: true })).toBeVisible({ timeout: 90000 });
   await expect(page.getByRole('heading', { name: 'example.com' })).toBeVisible();
 });
 
-test('sitewide report shows coverage, findings, and remediation prompts', async ({ page }) => {
+test('sitewide report shows coverage, expert review status, findings, and remediation prompts', async ({ page }) => {
   test.setTimeout(120000);
   await page.goto('/');
   await page.getByLabel('Website to audit').fill('https://example.com');
   await page.getByLabel('Audit coverage').selectOption('quick');
   await page.getByRole('button', { name: 'Run website audit' }).click();
-  await expect(page.getByText('Audit complete')).toBeVisible({ timeout: 90000 });
+  await expect(page.getByText('Audit complete', { exact: true })).toBeVisible({ timeout: 90000 });
+  await expect(page.getByText('Expert review layer', { exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /specialist review completed/i })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'What was actually reviewed' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'What needs to change' })).toBeVisible();
   await expect(page.getByText('Vibe-code remediation prompt').first()).toBeVisible();
@@ -56,7 +58,7 @@ test('a public website audit completes and CSV export works', async ({ page }) =
   await page.getByLabel('Website to audit').fill('https://example.com');
   await page.getByLabel('Audit coverage').selectOption('quick');
   await page.getByRole('button', { name: 'Run website audit' }).click();
-  await expect(page.getByText('Audit complete')).toBeVisible({ timeout: 90000 });
+  await expect(page.getByText('Audit complete', { exact: true })).toBeVisible({ timeout: 90000 });
   const downloadPromise = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Export CSV' }).click();
   const download = await downloadPromise;

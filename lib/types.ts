@@ -36,6 +36,12 @@ export type AuditCoverage = {
   limitations: string[];
 };
 
+export type ExpertReview = {
+  aiEnhanced: boolean;
+  assessments: string[];
+  specialists: string[];
+};
+
 export type AuditResult = {
   url: string;
   auditedAt: string;
@@ -47,4 +53,5 @@ export type AuditResult = {
   summary: string;
   positives?: string[];
   coverage?: AuditCoverage;
+  expertReview?: ExpertReview;
 };
