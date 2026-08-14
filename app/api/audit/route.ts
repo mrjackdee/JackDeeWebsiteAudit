@@ -9,6 +9,23 @@ export const maxDuration = 60;
 const allowedDepths = new Set(['quick','standard','deep']);
 const weight: Record<Priority,number> = { P0:18,P1:10,P2:5,P3:2 };
 const buckets = new Set(['UI Design','User Experience','Mobile','Vibe-Code Quality','Accessibility','Security','SEO/AEO','Technical Quality','Performance','Production Readiness']);
+const requestWindowMs = 10 * 60 * 1000;
+const requestLimit = 8;
+const requestCounts = new Map<string,{count:number;resetAt:number}>();
+
+function clientKey(request: NextRequest) {
+  return request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || request.headers.get('x-real-ip') || 'unknown';
+}
+
+function allowedRequest(request: NextRequest) {
+  const now=Date.now();
+  const key=clientKey(request);
+  const current=requestCounts.get(key);
+  if(!current || current.resetAt<=now){ requestCounts.set(key,{count:1,resetAt:now+requestWindowMs}); return true; }
+  if(current.count>=requestLimit) return false;
+  current.count+=1;
+  return true;
+}
 
 function mergeScores(base: Record<string,number>, findings: Finding[]) {
   const scores={...base};
@@ -20,6 +37,8 @@ function mergeScores(base: Record<string,number>, findings: Finding[]) {
 }
 
 export async function POST(request: NextRequest) {
+  if(!allowedRequest(request)) return NextResponse.json({error:'Too many audits were started from this connection. Please try again in a few minutes.'},{status:429,headers:{'Cache-Control':'no-store','Retry-After':'600'}});
+
   let body: unknown;
   try { body=await request.json(); } catch { return NextResponse.json({error:'The audit request was not valid. Refresh the page and try again.'},{status:400}); }
   if(!body || typeof body!=='object') return NextResponse.json({error:'The audit request was not valid.'},{status:400});
