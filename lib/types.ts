@@ -7,12 +7,33 @@ export type Finding = {
   detail: string;
   recommendation: string;
   page?: string;
+  agent?: string;
+  evidence?: string;
+  prompt?: string;
 };
 
 export type PageResult = {
   url: string;
   status: number;
   title: string;
+  sections?: number;
+  links?: number;
+  buttons?: number;
+  forms?: number;
+  images?: number;
+  headings?: number;
+};
+
+export type AuditCoverage = {
+  discoveredPages: number;
+  auditedPages: number;
+  linksChecked: number;
+  sectionsReviewed: number;
+  formsReviewed: number;
+  buttonsReviewed: number;
+  sitemapPagesFound: number;
+  truncated: boolean;
+  limitations: string[];
 };
 
 export type AuditResult = {
@@ -24,4 +45,6 @@ export type AuditResult = {
   findings: Finding[];
   pages: PageResult[];
   summary: string;
+  positives?: string[];
+  coverage?: AuditCoverage;
 };
