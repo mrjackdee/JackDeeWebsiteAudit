@@ -1,9 +1,6 @@
 name: QA
 
 on:
-  push:
-    branches:
-      - agent/**
   pull_request:
     branches:
       - main
