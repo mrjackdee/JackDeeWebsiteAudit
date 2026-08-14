@@ -118,9 +118,10 @@ export default function Home() {
           <div className="inputRow">
             <input
               id="siteUrl"
-              type="url"
+              type="text"
+              inputMode="url"
               required
-              placeholder="https://example.com"
+              placeholder="example.com"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               autoComplete="url"
@@ -150,7 +151,7 @@ export default function Home() {
               </select>
             </div>
           </div>
-          <p className="formNote">Only public pages are tested. Private network addresses and destructive security tests are blocked.</p>
+          <p className="formNote">Enter a website such as example.com or www.example.com. The secure https:// prefix is added automatically when needed. Only public pages are tested.</p>
         </form>
 
         {error && <div className="errorMessage" role="alert"><strong>Audit stopped.</strong> {error}</div>}
