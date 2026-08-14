@@ -80,15 +80,20 @@ async function commandText(sandbox: Sandbox, cmd: string, args: string[]) {
 
 async function installBrowser(sandbox: Sandbox) {
   await commandText(sandbox, 'npm', ['install', `agent-browser@${AGENT_BROWSER_VERSION}`, '--no-save']);
-  const install = await sandbox.runCommand({
+
+  const deps = await sandbox.runCommand({
     cmd: 'npx',
     args: ['agent-browser', 'install', '--with-deps'],
     sudo: true,
   });
-  if (install.exitCode !== 0) {
-    const stderr = (await install.stderr()).trim();
-    throw new Error(stderr || 'Chrome could not be installed in the isolated browser environment.');
+  if (deps.exitCode !== 0) {
+    const stderr = (await deps.stderr()).trim();
+    throw new Error(stderr || 'Chrome system dependencies could not be installed in the isolated browser environment.');
   }
+
+  // The sudo install places its browser cache under root. Install Chrome again as
+  // the sandbox user so the later agent-browser process can discover its binary.
+  await commandText(sandbox, 'npx', ['agent-browser', 'install']);
 }
 
 async function captureVariant(
