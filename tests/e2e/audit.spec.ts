@@ -13,7 +13,7 @@ test('private network addresses are rejected in plain language', async ({ page }
   await page.goto('/');
   await page.getByLabel('Website to audit').fill('http://127.0.0.1');
   await page.getByRole('button', { name: 'Run website audit' }).click();
-  await expect(page.getByRole('alert')).toContainText('Private network addresses cannot be audited.');
+  await expect(page.locator('.errorMessage')).toContainText('Private network addresses cannot be audited.');
 });
 
 test('a public website audit completes and report exports work', async ({ page }) => {
