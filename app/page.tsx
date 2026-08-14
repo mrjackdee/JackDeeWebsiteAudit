@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 type Finding = {
   priority: 'P0' | 'P1' | 'P2' | 'P3';
@@ -57,7 +57,6 @@ type AuditResult = {
 };
 
 const scoreOrder = ['UI Design','User Experience','Mobile','Vibe-Code Quality','Accessibility','Security','SEO/AEO','Technical Quality','Performance','Production Readiness'];
-const ACTIVE_RUN_KEY = 'jackdee-active-audit-run';
 
 export default function Home() {
   const [url, setUrl] = useState('');
@@ -67,50 +66,18 @@ export default function Home() {
   const [error, setError] = useState('');
   const [result, setResult] = useState<AuditResult | null>(null);
   const [copied, setCopied] = useState<number | null>(null);
-  const [progressMessage, setProgressMessage] = useState('Discovering pages and starting specialist reviews.');
 
   const critical = useMemo(() => result?.findings.filter((f) => f.priority === 'P0' || f.priority === 'P1') ?? [], [result]);
 
-  async function pollAudit(runId: string) {
-    setRunning(true);
-    for (let attempt = 0; attempt < 900; attempt += 1) {
-      const response = await fetch(`/api/audit/${encodeURIComponent(runId)}`, { cache:'no-store' });
-      const data = await response.json();
-      if (response.ok && data.status === 'completed' && data.result) {
-        setResult(data.result);
-        setRunning(false);
-        localStorage.removeItem(ACTIVE_RUN_KEY);
-        return;
-      }
-      if (!response.ok) {
-        localStorage.removeItem(ACTIVE_RUN_KEY);
-        throw new Error(data.error || 'The audit could not be completed.');
-      }
-      setProgressMessage(data.status === 'pending' ? 'Audit queued. Preparing the full-site review.' : 'Crawling the site and running specialist expert reviews.');
-      await new Promise(resolve => window.setTimeout(resolve, 2000));
-    }
-    throw new Error('The audit is still running longer than expected. Start a new audit or try again later.');
-  }
-
-  useEffect(() => {
-    const activeRun = localStorage.getItem(ACTIVE_RUN_KEY);
-    if (!activeRun) return;
-    setError('');
-    setProgressMessage('Reconnecting to your in-progress audit.');
-    pollAudit(activeRun).catch(err => { setError(err instanceof Error ? err.message : 'The audit could not be completed.'); setRunning(false); });
-  }, []);
-
   async function runAudit(e: React.FormEvent) {
     e.preventDefault(); setError(''); setResult(null); setRunning(true); setCopied(null);
-    setProgressMessage('Starting a durable full-site audit.');
     try {
       const response = await fetch('/api/audit', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ url, repoUrl, depth }) });
       const data = await response.json();
-      if (!response.ok) throw new Error(data.error || 'The audit could not be started.');
-      if (!data.runId) throw new Error('The audit could not be started.');
-      localStorage.setItem(ACTIVE_RUN_KEY, data.runId);
-      await pollAudit(data.runId);
-    } catch (err) { setError(err instanceof Error ? err.message : 'The audit could not be completed.'); setRunning(false); }
+      if (!response.ok) throw new Error(data.error || 'The audit could not be completed.');
+      setResult(data);
+    } catch (err) { setError(err instanceof Error ? err.message : 'The audit could not be completed.'); }
+    finally { setRunning(false); }
   }
 
   async function copyPrompt(prompt: string, index: number) {
@@ -164,7 +131,7 @@ export default function Home() {
               </select>
             </div>
           </div>
-          <p className="formNote">The app discovers routes from navigation, internal links, robots.txt, and XML sitemaps, then reviews every reachable page within the selected coverage tier. Long audits continue on the server even if the browser connection is interrupted. It does not submit purchases, deletes, messages, or other destructive actions.</p>
+          <p className="formNote">The app discovers routes from navigation, internal links, robots.txt, and XML sitemaps, reviews reachable pages within the selected tier, and sends the collected evidence to independent AI specialist agents. It does not submit purchases, deletes, messages, or other destructive actions.</p>
         </form>
         {error && <div className="errorMessage" role="alert"><strong>Audit stopped.</strong> {error}</div>}
       </section>
@@ -178,20 +145,20 @@ export default function Home() {
       )}
 
       {running && (
-        <section className="runningPanel" aria-live="polite"><div className="scanLine"/><div><span className="kicker">Durable multi-agent audit in progress</span><h2>Discovering and reviewing the complete public site</h2><p>{progressMessage} You can leave this page and return without restarting the server-side audit.</p></div></section>
+        <section className="runningPanel" aria-live="polite"><div className="scanLine"/><div><span className="kicker">Multi-agent audit in progress</span><h2>Discovering and reviewing the complete public site</h2><p>Crawling pages and links, reviewing page structure and source evidence, then running independent AI specialist reviews before compiling the final remediation report.</p></div></section>
       )}
 
       {result && (
         <section className="report">
           <div className="reportHeader">
             <div><span className="kicker">Audit complete</span><h2>{new URL(result.url).hostname}</h2><p>{result.summary}</p></div>
-            <div className="reportActions"><button onClick={downloadCsv}>Export CSV</button><button onClick={downloadJson}>Export JSON</button><button className="primaryButton" onClick={()=>{setResult(null);setUrl('');localStorage.removeItem(ACTIVE_RUN_KEY);}}>New audit</button></div>
+            <div className="reportActions"><button onClick={downloadCsv}>Export CSV</button><button onClick={downloadJson}>Export JSON</button><button className="primaryButton" onClick={()=>{setResult(null);setUrl('');}}>New audit</button></div>
           </div>
 
           {result.expertReview && (
             <section className="coveragePanel">
               <div className="sectionHeading compact"><span className="kicker">Expert review layer</span><h2>{result.expertReview.aiEnhanced ? 'Model-driven specialist review completed' : 'Deterministic specialist review completed'}</h2></div>
-              <p>{result.expertReview.aiEnhanced ? `${result.expertReview.specialists.length} real AI specialist agents independently reviewed the site-wide evidence after the crawler completed.` : 'The site-wide deterministic checks completed, but the model-driven specialist layer was unavailable for this run. The report discloses that limitation rather than presenting it as AI-reviewed.'}</p>
+              <p>{result.expertReview.aiEnhanced ? `${result.expertReview.specialists.length} independent AI specialist agents reviewed the site-wide evidence after the crawler completed.` : 'The site-wide deterministic checks completed, but the model-driven specialist layer was unavailable for this run. The report discloses that limitation rather than presenting it as AI-reviewed.'}</p>
               {!!result.expertReview.assessments.length && <details className="limitations"><summary>Specialist assessments</summary>{result.expertReview.assessments.map((item,i)=><p key={i}>{item}</p>)}</details>}
             </section>
           )}
@@ -216,7 +183,7 @@ export default function Home() {
           <div className="reportStats"><span><strong>{result.pagesChecked}</strong> pages checked</span><span><strong>{result.linksChecked}</strong> links checked</span><span><strong>{result.findings.length}</strong> findings</span><span><strong>{critical.length}</strong> launch blockers</span></div>
 
           {!!result.positives?.length && (
-            <section className="positivePanel"><div className="sectionHeading compact"><span className="kicker">What looks good</span><h2>Strengths worth preserving</h2></div><div className="positiveList">{result.positives.map((item,i)=><div key={i}><span>✓</span><p>{item}</p></div>)}</div></section>
+            <section className="positivePanel"><div className="sectionHeading compact"><span className="kicker">What looks good</span><h2>Strengths worth preserving</h2></div><div className="positiveList">{result.positives.map((item,i)=><div key={i}><span>✓</span><p>{item}</p></div>)}</section>
           )}
 
           <div className="sectionHeading"><span className="kicker">Prioritized findings</span><h2>What needs to change</h2><p>Each issue identifies who found it, what is wrong, why it matters, and exactly what to ask your vibe-coding tool to fix.</p></div>
