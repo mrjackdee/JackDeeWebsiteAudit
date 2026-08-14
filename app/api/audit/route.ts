@@ -3,6 +3,8 @@ import { runAudit } from '../../../lib/audit';
 import { auditPublicGithubRepo } from '../../../lib/repo-audit';
 import { buildRemediationPrompt } from '../../../lib/audit/agents';
 import { runAiExpertReview } from '../../../lib/audit/ai-review';
+import { runRenderedBrowserAudit } from '../../../lib/audit/rendered-browser';
+import { runVisualReview } from '../../../lib/audit/visual-review';
 import type { AuditResult, Finding, Priority } from '../../../lib/types';
 
 export const runtime = 'nodejs';
@@ -11,7 +13,7 @@ export const maxDuration = 300;
 const allowedDepths = new Set(['quick','standard','deep']);
 const weight: Record<Priority,number> = { P0:18,P1:10,P2:5,P3:2 };
 const buckets = new Set(['UI Design','User Experience','Mobile','Vibe-Code Quality','Accessibility','Security','SEO/AEO','Technical Quality','Performance','Production Readiness']);
-const specialists = ['Executive UI/UX Designer','Web Architect','QA Analyst','Vibe-Code Reviewer'];
+const structuredSpecialists = ['Executive UI/UX Designer','Web Architect','QA Analyst','Vibe-Code Reviewer'];
 const requestWindowMs = 10 * 60 * 1000;
 const requestLimit = 8;
 const requestCounts = new Map<string,{count:number;resetAt:number}>();
@@ -68,22 +70,57 @@ export async function POST(request: NextRequest) {
     ]);
     const repoFindings: Finding[]=repoFindingsRaw.map(f=>({ ...f, agent:'Web Architect', prompt:buildRemediationPrompt({...f,agent:'Web Architect'},website.url) }));
     const evidenceAudit: AuditResult={...website,findings:dedupeFindings([...website.findings,...repoFindings]),scores:mergeScores(website.scores,repoFindings)};
-    const expert=await runAiExpertReview(evidenceAudit);
-    const findings=dedupeFindings([...website.findings,...repoFindings,...expert.findings]);
+
+    const [expert,rendered]=await Promise.all([
+      runAiExpertReview(evidenceAudit),
+      runRenderedBrowserAudit(website.pages,depth),
+    ]);
+    const visual=await runVisualReview(website.url,rendered.evidence);
+
+    const findings=dedupeFindings([...website.findings,...repoFindings,...expert.findings,...visual.findings]);
     const blockers=findings.filter(f=>f.priority==='P0'||f.priority==='P1').length;
-    const coverage=website.coverage ? {...website.coverage,limitations:expert.limitation?[...website.coverage.limitations,expert.limitation]:website.coverage.limitations} : website.coverage;
-    const positives=[...new Set([...(website.positives||[]),...expert.positives])].slice(0,16);
+    const limitations=[
+      ...(website.coverage?.limitations||[]),
+      ...(expert.limitation?[expert.limitation]:[]),
+      ...(rendered.limitation?[rendered.limitation]:[]),
+      ...(visual.limitation?[visual.limitation]:[]),
+    ];
+    const coverage=website.coverage ? {
+      ...website.coverage,
+      renderedPagesReviewed:rendered.pagesReviewed,
+      limitations:[...new Set(limitations)],
+    } : website.coverage;
+    const positives=[...new Set([...(website.positives||[]),...expert.positives,...visual.positives])].slice(0,20);
+    const specialists=[
+      ...(expert.aiEnhanced?structuredSpecialists:[]),
+      ...(visual.aiEnhanced?['Visual QA Designer']:[]),
+    ];
+    const aiEnhanced=expert.aiEnhanced||visual.aiEnhanced;
+    const renderedNote=rendered.pagesReviewed>0?` ${rendered.pagesReviewed} representative page${rendered.pagesReviewed===1?' was':'s were'} also rendered in an isolated real browser across ${rendered.variantsReviewed} desktop/mobile viewport${rendered.variantsReviewed===1?'':'s'}.`:'';
     const summary=blockers
-      ? `${blockers} high-priority issue${blockers===1?'':'s'} should be addressed before launch. ${coverage?`The audit reviewed ${coverage.auditedPages} pages, ${coverage.sectionsReviewed} content regions, ${coverage.formsReviewed} forms, and ${coverage.buttonsReviewed} buttons.`:''}`
-      : `No P0 or P1 issues were detected across ${website.pagesChecked} audited pages. ${expert.aiEnhanced?'Four model-driven specialist agents also reviewed the site-wide evidence.':'The deterministic site-wide review completed successfully.'}`;
+      ? `${blockers} high-priority issue${blockers===1?'':'s'} should be addressed before launch. ${coverage?`The crawler reviewed ${coverage.auditedPages} pages, ${coverage.sectionsReviewed} content regions, ${coverage.formsReviewed} forms, and ${coverage.buttonsReviewed} buttons.`:''}${renderedNote}`
+      : `No P0 or P1 issues were detected across ${website.pagesChecked} crawled pages.${renderedNote} ${aiEnhanced?'Model-driven specialists reviewed the collected evidence.':'The deterministic site-wide review completed successfully.'}`;
+
     return NextResponse.json({
       ...website,
       findings,
-      scores:mergeScores(website.scores,[...repoFindings,...expert.findings]),
+      scores:mergeScores(website.scores,[...repoFindings,...expert.findings,...visual.findings]),
       summary,
       positives,
       coverage,
-      expertReview:{aiEnhanced:expert.aiEnhanced,assessments:expert.assessments,specialists},
+      expertReview:{
+        aiEnhanced,
+        assessments:[...expert.assessments,...(visual.assessment?[visual.assessment]:[])],
+        specialists,
+      },
+      renderedReview:{
+        browserEnhanced:rendered.browserEnhanced,
+        pagesReviewed:rendered.pagesReviewed,
+        pageUrls:rendered.pageUrls,
+        variantsReviewed:rendered.variantsReviewed,
+        assessment:visual.assessment,
+        limitation:rendered.limitation||visual.limitation,
+      },
     },{headers:{'Cache-Control':'no-store'}});
   } catch(error) {
     const message=error instanceof Error?error.message:'The audit could not be completed.';
