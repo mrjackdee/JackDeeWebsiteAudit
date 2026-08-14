@@ -35,7 +35,7 @@ test('a website can be audited without typing http or https', async ({ page }) =
   await expect(page.getByRole('heading', { name: 'example.com' })).toBeVisible();
 });
 
-test('sitewide report shows coverage, expert review status, findings, and remediation prompts', async ({ page }) => {
+test('sitewide report shows coverage, expert status, rendered-browser disclosure, findings, and remediation prompts', async ({ page }) => {
   test.setTimeout(120000);
   await page.goto('/');
   await page.getByLabel('Website to audit').fill('https://example.com');
@@ -44,7 +44,10 @@ test('sitewide report shows coverage, expert review status, findings, and remedi
   await expect(page.getByText('Audit complete', { exact: true })).toBeVisible({ timeout: 90000 });
   await expect(page.getByText('Expert review layer', { exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { name: /specialist review completed/i })).toBeVisible();
+  await expect(page.getByText('Rendered browser review', { exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Rendered browser review unavailable|Real browser evidence captured/i })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'What was actually reviewed' })).toBeVisible();
+  await expect(page.getByText('pages rendered', { exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'What needs to change' })).toBeVisible();
   await expect(page.getByText('Vibe-code remediation prompt').first()).toBeVisible();
   await page.getByText('Vibe-code remediation prompt').first().click();
