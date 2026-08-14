@@ -19,9 +19,14 @@ function privateIp(ip: string) {
 }
 
 export async function safeUrl(input: string) {
+  const trimmed = input.trim();
+  if (!trimmed) throw new Error('Enter a website address to audit.');
+  const hasScheme = /^[a-zA-Z][a-zA-Z\d+.-]*:/.test(trimmed);
+  const normalized = hasScheme ? trimmed : `https://${trimmed}`;
+
   let url: URL;
-  try { url = new URL(input); } catch { throw new Error('Enter a complete website address beginning with http:// or https://.'); }
-  if (!['http:','https:'].includes(url.protocol)) throw new Error('Only public http:// and https:// websites can be audited.');
+  try { url = new URL(normalized); } catch { throw new Error('Enter a valid website address, such as example.com.'); }
+  if (!['http:','https:'].includes(url.protocol)) throw new Error('Only public website addresses can be audited.');
   if (url.hostname === 'localhost' || url.hostname.endsWith('.local')) throw new Error('Private or local network websites cannot be audited.');
   if (net.isIP(url.hostname) && privateIp(url.hostname)) throw new Error('Private network addresses cannot be audited.');
   let records: { address: string }[];
