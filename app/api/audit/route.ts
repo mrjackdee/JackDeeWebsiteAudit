@@ -1,15 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { runAudit } from '../../../lib/audit';
-import { auditPublicGithubRepo } from '../../../lib/repo-audit';
-import { buildRemediationPrompt } from '../../../lib/audit/agents';
-import type { Finding, Priority } from '../../../lib/types';
+import { start } from 'workflow/api';
+import { siteAuditWorkflow } from '../../../workflows/site-audit';
 
 export const runtime = 'nodejs';
-export const maxDuration = 300;
 
 const allowedDepths = new Set(['quick','standard','deep']);
-const weight: Record<Priority,number> = { P0:18,P1:10,P2:5,P3:2 };
-const buckets = new Set(['UI Design','User Experience','Mobile','Vibe-Code Quality','Accessibility','Security','SEO/AEO','Technical Quality','Performance','Production Readiness']);
 const requestWindowMs = 10 * 60 * 1000;
 const requestLimit = 8;
 const requestCounts = new Map<string,{count:number;resetAt:number}>();
@@ -25,15 +20,6 @@ function allowedRequest(request: NextRequest) {
   current.count+=1; return true;
 }
 
-function mergeScores(base: Record<string,number>, findings: Finding[]) {
-  const scores={...base};
-  for(const f of findings){ const bucket=buckets.has(f.category)?f.category:'Technical Quality'; if(bucket==='Production Readiness') continue; scores[bucket]=Math.max(0,(scores[bucket]??100)-weight[f.priority]); }
-  scores['UI Design']=Math.round(((scores['Vibe-Code Quality']??100)+(scores['Mobile']??100)+(scores['Accessibility']??100)+92)/4);
-  scores['User Experience']=Math.round(((scores['Accessibility']??100)+(scores['Mobile']??100)+(scores['Technical Quality']??100)+(scores['UI Design']??100))/4);
-  scores['Production Readiness']=Math.round(((scores['Security']??100)+(scores['Technical Quality']??100)+(scores['Accessibility']??100)+(scores['Performance']??100)+(scores['Mobile']??100))/5);
-  return scores;
-}
-
 export async function POST(request: NextRequest) {
   if(!allowedRequest(request)) return NextResponse.json({error:'Too many audits were started from this connection. Please try again in a few minutes.'},{status:429,headers:{'Cache-Control':'no-store','Retry-After':'600'}});
   let body: unknown;
@@ -47,14 +33,10 @@ export async function POST(request: NextRequest) {
   if(repoUrl.length>2048) return NextResponse.json({error:'The repository address is too long.'},{status:400});
 
   try {
-    const [website,repoFindingsRaw]=await Promise.all([runAudit(url,depth),repoUrl?auditPublicGithubRepo(repoUrl):Promise.resolve([])]);
-    const repoFindings: Finding[]=repoFindingsRaw.map(f=>({ ...f, agent:'Web Architect', prompt:buildRemediationPrompt({...f,agent:'Web Architect'},website.url) }));
-    const findings=[...website.findings,...repoFindings].sort((a,b)=>['P0','P1','P2','P3'].indexOf(a.priority)-['P0','P1','P2','P3'].indexOf(b.priority));
-    const blockers=findings.filter(f=>f.priority==='P0'||f.priority==='P1').length;
-    const summary=blockers?`${blockers} high-priority issue${blockers===1?'':'s'} should be addressed before launch. ${website.coverage?`The audit reviewed ${website.coverage.auditedPages} pages, ${website.coverage.sectionsReviewed} content regions, ${website.coverage.formsReviewed} forms, and ${website.coverage.buttonsReviewed} buttons.`:''}`:website.summary;
-    return NextResponse.json({...website,findings,scores:mergeScores(website.scores,repoFindings),summary},{headers:{'Cache-Control':'no-store'}});
+    const run = await start(siteAuditWorkflow, [url, repoUrl, depth]);
+    return NextResponse.json({ runId: run.runId }, { status:202, headers:{'Cache-Control':'no-store'} });
   } catch(error) {
-    const message=error instanceof Error?error.message:'The audit could not be completed.';
+    const message=error instanceof Error?error.message:'The audit could not be started.';
     return NextResponse.json({error:message},{status:422,headers:{'Cache-Control':'no-store'}});
   }
 }
