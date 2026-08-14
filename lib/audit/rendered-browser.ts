@@ -21,6 +21,13 @@ export type RenderedBrowserResult = {
 };
 
 const AGENT_BROWSER_VERSION = '0.31.1';
+const CHROMIUM_SYSTEM_DEPS = [
+  'nss','nspr','libxkbcommon','atk','at-spi2-atk','at-spi2-core',
+  'libXcomposite','libXdamage','libXrandr','libXfixes','libXcursor',
+  'libXi','libXtst','libXScrnSaver','libXext','mesa-libgbm','libdrm',
+  'mesa-libGL','mesa-libEGL','cups-libs','alsa-lib','pango','cairo',
+  'gtk3','dbus-libs',
+];
 
 function canUseSandbox() {
   return Boolean(
@@ -82,8 +89,8 @@ async function installBrowser(sandbox: Sandbox) {
   await commandText(sandbox, 'npm', ['install', `agent-browser@${AGENT_BROWSER_VERSION}`, '--no-save']);
 
   const deps = await sandbox.runCommand({
-    cmd: 'npx',
-    args: ['agent-browser', 'install', '--with-deps'],
+    cmd: 'sh',
+    args: ['-c', `dnf clean all >/dev/null 2>&1; dnf install -y --skip-broken ${CHROMIUM_SYSTEM_DEPS.join(' ')} >/dev/null 2>&1; ldconfig`],
     sudo: true,
   });
   if (deps.exitCode !== 0) {
@@ -91,8 +98,8 @@ async function installBrowser(sandbox: Sandbox) {
     throw new Error(stderr || 'Chrome system dependencies could not be installed in the isolated browser environment.');
   }
 
-  // The sudo install places its browser cache under root. Install Chrome again as
-  // the sandbox user so the later agent-browser process can discover its binary.
+  // Chrome must be installed as the normal sandbox user so agent-browser can
+  // discover the binary in that user's browser cache when the audit runs.
   await commandText(sandbox, 'npx', ['agent-browser', 'install']);
 }
 
