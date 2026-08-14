@@ -9,6 +9,15 @@ test('homepage renders the primary audit flow without horizontal overflow', asyn
   expect(overflow).toBeFalsy();
 });
 
+test('security headers are present on the app shell', async ({ request }) => {
+  const response = await request.get('/');
+  expect(response.status()).toBe(200);
+  expect(response.headers()['content-security-policy']).toContain("default-src 'self'");
+  expect(response.headers()['x-content-type-options']).toBe('nosniff');
+  expect(response.headers()['referrer-policy']).toBe('strict-origin-when-cross-origin');
+  expect(response.headers()['x-frame-options']).toBe('DENY');
+});
+
 test('private network addresses are rejected in plain language', async ({ page }) => {
   await page.goto('/');
   await page.getByLabel('Website to audit').fill('http://127.0.0.1');
