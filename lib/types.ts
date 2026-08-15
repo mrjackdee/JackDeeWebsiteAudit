@@ -32,6 +32,7 @@ export type AuditCoverage = {
   formsReviewed: number;
   buttonsReviewed: number;
   sitemapPagesFound: number;
+  renderedPagesReviewed?: number;
   truncated: boolean;
   limitations: string[];
 };
@@ -40,6 +41,15 @@ export type ExpertReview = {
   aiEnhanced: boolean;
   assessments: string[];
   specialists: string[];
+};
+
+export type RenderedReview = {
+  browserEnhanced: boolean;
+  pagesReviewed: number;
+  pageUrls: string[];
+  variantsReviewed: number;
+  assessment?: string;
+  limitation?: string;
 };
 
 export type AuditResult = {
@@ -54,4 +64,5 @@ export type AuditResult = {
   positives?: string[];
   coverage?: AuditCoverage;
   expertReview?: ExpertReview;
+  renderedReview?: RenderedReview;
 };

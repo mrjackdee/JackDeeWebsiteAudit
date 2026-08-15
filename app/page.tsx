@@ -22,6 +22,7 @@ type Coverage = {
   formsReviewed: number;
   buttonsReviewed: number;
   sitemapPagesFound: number;
+  renderedPagesReviewed?: number;
   truncated: boolean;
   limitations: string[];
 };
@@ -42,6 +43,15 @@ type ExpertReview = {
   specialists: string[];
 };
 
+type RenderedReview = {
+  browserEnhanced: boolean;
+  pagesReviewed: number;
+  pageUrls: string[];
+  variantsReviewed: number;
+  assessment?: string;
+  limitation?: string;
+};
+
 type AuditResult = {
   url: string;
   auditedAt: string;
@@ -54,6 +64,7 @@ type AuditResult = {
   positives?: string[];
   coverage?: Coverage;
   expertReview?: ExpertReview;
+  renderedReview?: RenderedReview;
 };
 
 const scoreOrder = ['UI Design','User Experience','Mobile','Vibe-Code Quality','Accessibility','Security','SEO/AEO','Technical Quality','Performance','Production Readiness'];
@@ -109,7 +120,7 @@ export default function Home() {
       <section className="hero" id="top">
         <div className="eyebrow">End-to-end website evaluation</div>
         <h1>Audit the entire website, not just the homepage.</h1>
-        <p className="heroCopy">A coordinated team of specialist agents reviews the publicly discoverable site as a world-class UI/UX designer, web architect, developer, QA analyst, accessibility specialist, security analyst, SEO/AEO strategist, and vibe-code reviewer.</p>
+        <p className="heroCopy">A coordinated team combines full-site crawling with specialist AI review and isolated real-browser rendering to evaluate UI/UX, architecture, QA, accessibility, security, SEO/AEO, mobile quality, and vibe-coded design problems.</p>
 
         <form className="auditForm" onSubmit={runAudit}>
           <label htmlFor="siteUrl">Website to audit</label>
@@ -131,21 +142,21 @@ export default function Home() {
               </select>
             </div>
           </div>
-          <p className="formNote">The app discovers routes from navigation, internal links, robots.txt, and XML sitemaps, reviews reachable pages within the selected tier, and sends the collected evidence to independent AI specialist agents. It does not submit purchases, deletes, messages, or other destructive actions.</p>
+          <p className="formNote">The crawler reviews reachable pages within the selected tier. In production, representative pages are also opened inside an isolated browser at desktop and mobile sizes, and screenshots are reviewed by a visual specialist. The app never submits purchases, deletes, messages, or other destructive actions.</p>
         </form>
         {error && <div className="errorMessage" role="alert"><strong>Audit stopped.</strong> {error}</div>}
       </section>
 
       {!result && !running && (
         <section className="capabilities" aria-label="Audit capabilities">
-          <article><span>01</span><h2>Experience agent</h2><p>Reviews page hierarchy, visual rhythm, typography, spacing, navigation, mobile quality, originality, and vibe-coding symptoms.</p></article>
+          <article><span>01</span><h2>Experience agents</h2><p>Review hierarchy, typography, spacing, navigation, mobile quality, originality, visual screenshots, and common vibe-coding symptoms.</p></article>
           <article><span>02</span><h2>Engineering agents</h2><p>Crawl routes, inspect links and controls, review source when provided, check performance signals, architecture, accessibility, SEO, and production quality.</p></article>
           <article><span>03</span><h2>Remediation agent</h2><p>Turns every finding into a plain-English recommendation and a detailed prompt ready to paste into a vibe-coding tool.</p></article>
         </section>
       )}
 
       {running && (
-        <section className="runningPanel" aria-live="polite"><div className="scanLine"/><div><span className="kicker">Multi-agent audit in progress</span><h2>Discovering and reviewing the complete public site</h2><p>Crawling pages and links, reviewing page structure and source evidence, then running independent AI specialist reviews before compiling the final remediation report.</p></div></section>
+        <section className="runningPanel" aria-live="polite"><div className="scanLine"/><div><span className="kicker">Multi-agent audit in progress</span><h2>Discovering, rendering, and reviewing the public site</h2><p>Crawling pages and links, reviewing source evidence, rendering representative desktop/mobile views in an isolated browser, then running specialist AI reviews before compiling the remediation report.</p></div></section>
       )}
 
       {result && (
@@ -158,8 +169,16 @@ export default function Home() {
           {result.expertReview && (
             <section className="coveragePanel">
               <div className="sectionHeading compact"><span className="kicker">Expert review layer</span><h2>{result.expertReview.aiEnhanced ? 'Model-driven specialist review completed' : 'Deterministic specialist review completed'}</h2></div>
-              <p>{result.expertReview.aiEnhanced ? `${result.expertReview.specialists.length} independent AI specialist agents reviewed the site-wide evidence after the crawler completed.` : 'The site-wide deterministic checks completed, but the model-driven specialist layer was unavailable for this run. The report discloses that limitation rather than presenting it as AI-reviewed.'}</p>
+              <p>{result.expertReview.aiEnhanced ? `${result.expertReview.specialists.length} independent AI specialist agents reviewed the collected audit evidence.` : 'The deterministic checks completed, but the model-driven specialist layer was unavailable for this run. The report discloses that limitation rather than presenting it as AI-reviewed.'}</p>
               {!!result.expertReview.assessments.length && <details className="limitations"><summary>Specialist assessments</summary>{result.expertReview.assessments.map((item,i)=><p key={i}>{item}</p>)}</details>}
+            </section>
+          )}
+
+          {result.renderedReview && (
+            <section className="coveragePanel">
+              <div className="sectionHeading compact"><span className="kicker">Rendered browser review</span><h2>{result.renderedReview.browserEnhanced ? 'Real browser evidence captured' : 'Rendered browser review unavailable'}</h2></div>
+              <p>{result.renderedReview.browserEnhanced ? `${result.renderedReview.pagesReviewed} representative page${result.renderedReview.pagesReviewed===1?'':'s'} were opened in an isolated browser across ${result.renderedReview.variantsReviewed} desktop/mobile viewport${result.renderedReview.variantsReviewed===1?'':'s'}. Screenshots and the live interactive accessibility tree were used as audit evidence.` : (result.renderedReview.limitation || 'The audit completed without rendered browser evidence.')}</p>
+              {!!result.renderedReview.pageUrls.length && <details className="limitations"><summary>Pages rendered</summary>{result.renderedReview.pageUrls.map((item,i)=><p key={i}>{item}</p>)}</details>}
             </section>
           )}
 
@@ -167,7 +186,8 @@ export default function Home() {
             <section className="coveragePanel">
               <div className="sectionHeading compact"><span className="kicker">Audit coverage</span><h2>What was actually reviewed</h2></div>
               <div className="coverageGrid">
-                <div><strong>{result.coverage.auditedPages}</strong><span>pages</span></div>
+                <div><strong>{result.coverage.auditedPages}</strong><span>pages crawled</span></div>
+                <div><strong>{result.coverage.renderedPagesReviewed??0}</strong><span>pages rendered</span></div>
                 <div><strong>{result.coverage.linksChecked}</strong><span>links</span></div>
                 <div><strong>{result.coverage.sectionsReviewed}</strong><span>content regions</span></div>
                 <div><strong>{result.coverage.formsReviewed}</strong><span>forms</span></div>
