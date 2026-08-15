@@ -5,6 +5,7 @@ import type { PageResult } from '../../../lib/types';
 export const runtime = 'nodejs';
 export const maxDuration = 300;
 
+// Preview-only smoke route used to verify the hosted rendered-browser runtime before release.
 export async function GET() {
   if (process.env.VERCEL_ENV === 'production') {
     return NextResponse.json({ error:'Not available in production.' }, { status:404 });
