@@ -1,12 +1,12 @@
 {
   "project": "mrjackdee.com Experience V2",
-  "lastUpdated": "2026-08-29T13:37:55Z",
+  "lastUpdated": "2026-08-29T14:01:07Z",
   "overallCompletion": 15,
   "goLiveStatus": "Not ready yet",
-  "goLiveReason": "The homepage has now been reviewed on desktop and mobile in both dark and light appearances, but the independent reviewer still needs to complete the recheck and the remaining pages have not yet been rebuilt in the V2 experience.",
+  "goLiveReason": "The homepage has been reviewed on desktop and mobile in both dark and light appearances, but the separate reviewer still cannot directly inspect the shared evidence. Interaction checks and the remaining V2 page rebuilds are also still open.",
   "currentFocus": "Proving the V2 homepage design and behavior before rebuilding the rest of the site",
   "designCheckpoint": "Review in progress",
-  "nextMilestone": "Complete the independent recheck of the homepage on desktop and mobile, finish the remaining interaction checks, correct any important findings, and then approve or revise the homepage direction before rebuilding the remaining pages.",
+  "nextMilestone": "Place the latest desktop and mobile dark/light evidence where the independent reviewer can inspect it, complete the remaining interaction checks, correct any important findings, and then approve or revise the homepage direction before rebuilding the remaining pages.",
   "deliveryOutlook": "Expected total delivery effort remains 15–17 hours, with a planning range of 14–19 hours. The forecast is unchanged.",
   "sponsorActionRequired": false,
   "sponsorAction": "No action needed from you right now.",
@@ -16,20 +16,22 @@
   "issues": 2,
   "completed": [
     "Created a separate V2 workspace so the redesign can continue without affecting the current live website.",
-    "Built the first V2 homepage with a cinematic opening, progressive proof points, more immersive project storytelling, interactive AI content, on-site Resume and Scheduling paths, mobile-specific behavior and a lower-motion option.",
+    "Built the first V2 homepage with a scene-led opening, progressive proof points, more immersive project storytelling, interactive AI content, on-site Resume and Scheduling paths, mobile-specific behavior and a lower-motion option.",
     "Added a purpose-designed light appearance in response to the independent review finding.",
     "Completed 24 website checks covering Home, Resume, Schedule, Privacy Policy, Terms of Service and the project dashboard on desktop and mobile in dark and light appearances.",
     "Confirmed the reviewed pages loaded correctly, retained the selected appearance, contained the expected content and showed no page or browser-console errors.",
     "Primary visual review confirms strong portrait integration, responsive composition and a purpose-designed light appearance rather than a simple color inversion."
   ],
   "activeWork": [
-    "Independent recheck of the new desktop and mobile website evidence.",
+    "Independent recheck of the latest desktop and mobile website evidence.",
+    "Closing the evidence handoff gap because the shared visual-evidence folder is still empty.",
     "Keyboard, reduced-motion, touch, pointer and on-site scheduling interaction checks.",
     "Comparison of the homepage experience against the agreed Lama Lama, Rauno and SharpLink reference standard.",
     "Protecting Resume, Scheduling, legal, search visibility and accessibility foundations while the V2 design is refined."
   ],
   "nextActions": [
-    "Complete the independent review of the latest homepage evidence.",
+    "Place the latest desktop and mobile dark/light evidence in the shared review location.",
+    "Complete the independent review of that evidence.",
     "Finish the remaining interaction checks.",
     "Correct and recheck any important design or usability findings.",
     "After the design checkpoint is approved, rebuild Work, the four case studies, Applied AI, Experience, Resume, About, Insights and Connect in the V2 experience.",
@@ -38,14 +40,15 @@
   "reviewFindings": [
     "No must-fix emergency is open.",
     "Three important items remain open: independent visual and interaction confirmation, confirmation that the light experience meets the same standard as dark, and extension of the V2 experience across the remaining pages.",
-    "The latest desktop and mobile website captures have been produced, but they are not yet stored in the shared visual-evidence folder, so the independent reviewer cannot directly inspect them yet.",
-    "The Resume and Schedule pages remain more conventional than the V2 homepage, so the site-wide V2 experience is not considered complete yet."
+    "The latest desktop and mobile website captures have been produced, but the shared visual-evidence folder is still empty, so the independent reviewer cannot directly inspect them yet.",
+    "No new must-fix or important independent finding was added in this cycle."
   ],
   "blockers": [
-    "The design checkpoint stays open until the independent reviewer can directly inspect the latest desktop and mobile dark and light evidence and finish the remaining interaction checks. The shared visual-evidence folder is currently empty.",
+    "The design checkpoint stays open until the independent reviewer can directly inspect the latest desktop and mobile dark/light evidence and finish the remaining interaction checks.",
     "The full site cannot be considered V2 until the approved experience is applied to the remaining pages and rechecked."
   ],
   "links": {
+    "dashboard": "https://jack-dee-website-audit.vercel.app/v2-status",
     "documents": "https://drive.google.com/drive/folders/1cJMSfkai5uzQRqEhDKfrlaFmZZzgYFCC",
     "risks": "https://docs.google.com/spreadsheets/d/10_kjKeGWC_vrwbOjfanUxA5oDSO13JlQ7c2SdQ3SfkA/edit",
     "slides": "https://docs.google.com/presentation/d/1y9aqTbMH1f7fehHv7IXUmg-f7DqRAWDV7I6HggoTDaA/edit",
