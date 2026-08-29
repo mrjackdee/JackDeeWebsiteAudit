@@ -1,13 +1,13 @@
 {
   "project": "mrjackdee.com Experience V2",
-  "lastUpdated": "2026-08-29T17:41:00Z",
+  "lastUpdated": "2026-08-29T18:02:00Z",
   "overallCompletion": 30,
   "goLiveStatus": "Not ready yet",
-  "goLiveReason": "All four detailed case studies now follow the V2 scene-led direction and the latest working version is building successfully. Completion remains at 30% until the new case-study work is visually rechecked across desktop/mobile and dark/light appearances and the remaining interaction review is completed.",
-  "currentFocus": "Visually rechecking the expanded V2 experience and completing interaction and accessibility checks",
+  "goLiveReason": "The four detailed case studies have been rebuilt with distinct storytelling treatments, and the current working version passed release checks, TypeScript validation and production build. Completion remains at 30% until the fresh desktop/mobile dark/light review finishes and the remaining interaction checks are complete.",
+  "currentFocus": "Verifying the differentiated case studies and completing interaction and accessibility checks",
   "designCheckpoint": "Review in progress",
-  "nextMilestone": "Complete the fresh desktop/mobile dark/light review for the rebuilt case studies, then finish keyboard, reduced-motion, touch, pointer and on-site scheduling checks.",
-  "deliveryOutlook": "The detailed case-study build is complete and the recovery plan remains on a same-day sponsor-ready target if the consolidated review does not uncover a material redesign issue.",
+  "nextMilestone": "Finish the fresh desktop/mobile dark/light review, visually confirm the four differentiated case studies, then complete keyboard, reduced-motion, touch, pointer and on-site scheduling checks.",
+  "deliveryOutlook": "The recovery plan remains on a same-day sponsor-ready target if the active visual review passes and the remaining interaction review does not uncover a material issue.",
   "sponsorActionRequired": false,
   "sponsorAction": "No action needed from you right now.",
   "mustFixProblems": 0,
@@ -17,38 +17,38 @@
   "completed": [
     "Reached the 30% recovery milestone through implemented and visually reviewed website work.",
     "Extended the V2 direction from the homepage into Work, Applied AI, Experience, Insights, About and Connect.",
-    "Completed scene-led V2 treatment for the JLL AI, Corrigo, Order of KP and Serelda detailed case studies.",
-    "Kept evidence and role attribution within confirmed boundaries throughout the case-study rebuild.",
+    "Rebuilt all four detailed case studies while keeping role attribution and outcome claims within confirmed evidence.",
+    "Directly addressed the independent finding that the case studies felt too similar by giving each story a different visual and narrative system.",
+    "The latest working version passed release checks, TypeScript validation and production build before the new visual review began.",
     "Strengthened keyboard accessibility with a skip-to-content control and more consistent visible focus treatment.",
     "Kept scheduling on the website and preserved the Resume and legal experiences.",
-    "The latest working version completed its build successfully after the case-study and accessibility updates.",
-    "The prior 64-view desktop/mobile dark/light check completed successfully with no page, appearance or primary-content failures."
+    "Kept all work isolated from the current mrjackdee.com production website."
   ],
   "activeWork": [
-    "Visually rechecking the four rebuilt case studies on desktop and mobile in dark and light appearances.",
+    "Running a fresh desktop/mobile dark/light visual review against the differentiated case-study build.",
+    "Visually rechecking each of the four case studies after their storytelling systems were separated.",
     "Completing keyboard, reduced-motion, touch, pointer and on-site scheduling checks.",
-    "Preparing the expanded website evidence for independent review.",
-    "Correcting any important visual or interaction issue immediately if one is found."
+    "Preparing the expanded website evidence for independent review."
   ],
   "nextActions": [
-    "Run the full desktop/mobile dark/light website review again with the rebuilt case studies included.",
+    "Finish the active visual review and inspect the four changed case-study experiences.",
+    "Correct any must-fix or important visual issue immediately.",
     "Complete the remaining interaction and accessibility checks.",
-    "Resolve any must-fix or important findings immediately.",
     "Have the independent reviewer recheck the completed core experience.",
-    "Synchronize the final project documents and client presentation with reviewed website evidence."
+    "Synchronize final project documents and the client presentation with reviewed website evidence."
   ],
   "reviewFindings": [
     "No must-fix emergency is open.",
-    "Four important items are open after the latest independent review.",
-    "The current desktop and mobile visuals show a substantially stronger and more coherent V2 direction across the homepage, core pages, Resume and both dark and light appearances.",
-    "The four detailed case studies are now built, but they still use nearly the same composition and storytelling rhythm. They need more distinct experiences so each story feels specific to the work rather than like the same template with different content.",
-    "Dark and light appearances look intentionally designed in the current visual review. Final confirmation still requires checking focus, motion and interaction behavior on the actual hosted website.",
-    "The scheduling experience is visually integrated, but the full embedded booking interaction has not yet been independently exercised from meeting selection through the embedded calendar.",
+    "Four important items remain formally open until their fixes or verification are independently rechecked.",
+    "The prior concern that all four case studies used nearly the same composition has been directly addressed in the working version with four distinct storytelling systems.",
+    "The differentiated case-study build has passed technical build validation and is now in fresh visual review.",
+    "Dark and light appearances previously passed static visual review. Final confirmation still requires checking focus, motion and interaction behavior.",
+    "The scheduling experience is visually integrated, but the full embedded booking interaction still needs independent verification.",
     "No sponsor action is required at this time."
   ],
   "blockers": [
-    "Final experience approval is blocked until the four case studies are made more visually and narratively distinct and then independently rechecked.",
-    "Final interaction approval is blocked until the actual hosted website can be checked for scroll flow, pointer and touch behavior, keyboard use, reduced-motion behavior, page transitions and the full embedded scheduling experience."
+    "Final experience approval is blocked until the differentiated case studies finish visual recheck and independent review confirms the prior repetition issue is resolved.",
+    "Final interaction approval is blocked until scroll flow, pointer and touch behavior, keyboard use, reduced-motion behavior, page transitions and the full embedded scheduling experience are verified."
   ],
   "links": {
     "dashboard": "https://jack-dee-website-audit.vercel.app/v2-status",
