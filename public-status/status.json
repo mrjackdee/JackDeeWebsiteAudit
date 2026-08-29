@@ -1,13 +1,13 @@
 {
   "project": "mrjackdee.com Experience V2",
-  "lastUpdated": "2026-08-29T16:31:56Z",
+  "lastUpdated": "2026-08-29T17:09:30Z",
   "overallCompletion": 30,
   "goLiveStatus": "Not ready yet",
-  "goLiveReason": "The accelerated rebuild has reached its first recovery milestone. Six additional core pages now follow the V2 direction and the latest 64-view website check passed, but the detailed case-study pages and final interaction review are still open.",
-  "currentFocus": "Completing the remaining detailed case-study experiences and consolidated interaction checks",
+  "goLiveReason": "All four detailed case studies now follow the V2 scene-led direction and the latest working version is building successfully. Completion remains at 30% until the new case-study work is visually rechecked across desktop/mobile and dark/light appearances and the remaining interaction review is completed.",
+  "currentFocus": "Visually rechecking the expanded V2 experience and completing interaction and accessibility checks",
   "designCheckpoint": "Review in progress",
-  "nextMilestone": "Complete the four detailed case-study pages, rerun the full visual check, and finish keyboard, reduced-motion, touch, pointer and on-site scheduling checks.",
-  "deliveryOutlook": "The recovery plan has reached 30% complete. A same-day sponsor-ready target remains possible if the remaining build and review do not uncover a material redesign issue.",
+  "nextMilestone": "Complete the fresh desktop/mobile dark/light review for the rebuilt case studies, then finish keyboard, reduced-motion, touch, pointer and on-site scheduling checks.",
+  "deliveryOutlook": "The detailed case-study build is complete and the recovery plan remains on a same-day sponsor-ready target if the consolidated review does not uncover a material redesign issue.",
   "sponsorActionRequired": false,
   "sponsorAction": "No action needed from you right now.",
   "mustFixProblems": 0,
@@ -17,37 +17,38 @@
   "completed": [
     "Reached the 30% recovery milestone through implemented and visually reviewed website work.",
     "Extended the V2 direction from the homepage into Work, Applied AI, Experience, Insights, About and Connect.",
-    "Reworked Work into a scene-led evidence sequence instead of a conventional card grid.",
-    "Strengthened portrait integration and executive storytelling on About.",
+    "Completed scene-led V2 treatment for the JLL AI, Corrigo, Order of KP and Serelda detailed case studies.",
+    "Kept evidence and role attribution within confirmed boundaries throughout the case-study rebuild.",
+    "Strengthened keyboard accessibility with a skip-to-content control and more consistent visible focus treatment.",
     "Kept scheduling on the website and preserved the Resume and legal experiences.",
-    "Expanded website checks to 64 views covering 16 routes on desktop and mobile in dark and light appearances.",
-    "The latest 64-view check completed successfully with no page, appearance or primary-content failures.",
-    "Corrected visual contrast issues found during direct review before crediting the milestone."
+    "The latest working version completed its build successfully after the case-study and accessibility updates.",
+    "The prior 64-view desktop/mobile dark/light check completed successfully with no page, appearance or primary-content failures."
   ],
   "activeWork": [
-    "Rebuilding the four detailed case-study pages in the V2 experience.",
-    "Preparing consolidated keyboard, reduced-motion, touch, pointer and on-site scheduling checks.",
+    "Visually rechecking the four rebuilt case studies on desktop and mobile in dark and light appearances.",
+    "Completing keyboard, reduced-motion, touch, pointer and on-site scheduling checks.",
     "Preparing the expanded website evidence for independent review.",
-    "Keeping evidence and role attribution accurate while increasing visual ambition."
+    "Correcting any important visual or interaction issue immediately if one is found."
   ],
   "nextActions": [
-    "Complete the JLL AI, Corrigo, Order of KP and Serelda case-study experiences.",
-    "Run the full desktop/mobile dark/light website check again after that build batch.",
+    "Run the full desktop/mobile dark/light website review again with the rebuilt case studies included.",
     "Complete the remaining interaction and accessibility checks.",
-    "Have the independent reviewer recheck the completed core experience and resolve remaining important findings.",
+    "Resolve any must-fix or important findings immediately.",
+    "Have the independent reviewer recheck the completed core experience.",
     "Synchronize the final project documents and client presentation with reviewed website evidence."
   ],
   "reviewFindings": [
     "No must-fix emergency is open.",
-    "Three important items remain open pending completion and independent confirmation.",
-    "The delivery team reports a successful 64-view website check and broader V2 page coverage, but the controlled shared visual-evidence location is still empty, so the independent reviewer cannot yet approve that visual result.",
-    "Dark and light appearances are reported as implemented, but independent confirmation that both meet the same quality standard on desktop and mobile is still outstanding.",
-    "The four detailed case-study pages remain incomplete, so the full site-wide V2 experience is not yet ready for approval.",
+    "Three important items remain open pending visual and interaction confirmation.",
+    "The prior build gap is closed because all four detailed case studies are now implemented in the V2 direction.",
+    "The new case-study visual result is not yet counted as completed progress because a fresh rendered review is still required.",
+    "Dark and light appearances were successfully checked before the case-study rebuild, but the new detailed pages still require equivalent desktop/mobile confirmation.",
+    "Keyboard access was strengthened in this cycle, while runtime keyboard, reduced-motion, touch, pointer and scheduling checks remain open.",
     "No sponsor action is required at this time."
   ],
   "blockers": [
-    "Independent approval cannot be completed until the current desktop and mobile visual evidence can be inspected and the remaining interaction checks are completed.",
-    "The website cannot be considered ready until the four detailed case-study pages match the new experience direction and all important findings are visually rechecked."
+    "Independent approval cannot be completed until the rebuilt case studies are included in current visual evidence and the remaining interaction checks are completed.",
+    "The project remains RED until the expanded V2 experience is visually rechecked and the remaining important findings are closed or independently accepted."
   ],
   "links": {
     "dashboard": "https://jack-dee-website-audit.vercel.app/v2-status",
