@@ -1,6 +1,6 @@
 {
   "project": "mrjackdee.com Experience V2",
-  "lastUpdated": "2026-08-29T18:02:00Z",
+  "lastUpdated": "2026-08-29T18:36:00Z",
   "overallCompletion": 30,
   "goLiveStatus": "Not ready yet",
   "goLiveReason": "The four detailed case studies have been rebuilt with distinct storytelling treatments, and the current working version passed release checks, TypeScript validation and production build. Completion remains at 30% until the fresh desktop/mobile dark/light review finishes and the remaining interaction checks are complete.",
@@ -39,15 +39,16 @@
   ],
   "reviewFindings": [
     "No must-fix emergency is open.",
-    "Four important items remain formally open until their fixes or verification are independently rechecked.",
-    "The prior concern that all four case studies used nearly the same composition has been directly addressed in the working version with four distinct storytelling systems.",
-    "The differentiated case-study build has passed technical build validation and is now in fresh visual review.",
-    "Dark and light appearances previously passed static visual review. Final confirmation still requires checking focus, motion and interaction behavior.",
+    "Four important items remain open until their corrections or verification are independently rechecked.",
+    "The current V2 working version reports four different case-study storytelling systems, which directly addresses the prior concern that the detailed stories felt too repetitive.",
+    "That case-study problem cannot be closed yet because the corrected pages have not been independently visually rechecked from the current controlled evidence set or through a directly inspectable website session.",
+    "Earlier desktop and mobile dark/light captures showed no obvious static theme mismatch. Focus, motion and interaction behavior still require confirmation.",
     "The scheduling experience is visually integrated, but the full embedded booking interaction still needs independent verification.",
+    "The verified risks & issues record remains at four risks, two assumptions, three issues and two dependencies, with eight significant open items.",
     "No sponsor action is required at this time."
   ],
   "blockers": [
-    "Final experience approval is blocked until the differentiated case studies finish visual recheck and independent review confirms the prior repetition issue is resolved.",
+    "Final experience approval is blocked until the corrected case studies are visually rechecked on the actual website or through the controlled current evidence set.",
     "Final interaction approval is blocked until scroll flow, pointer and touch behavior, keyboard use, reduced-motion behavior, page transitions and the full embedded scheduling experience are verified."
   ],
   "links": {
