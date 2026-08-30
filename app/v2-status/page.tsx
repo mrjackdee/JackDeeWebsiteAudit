@@ -8,8 +8,9 @@ export const metadata: Metadata = {
 };
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
-const STATUS_URL = 'https://raw.githubusercontent.com/mrjackdee/JackDeeWebsiteAudit/v2-status-public-data/public-status/status.json';
+const STATUS_API_URL = 'https://api.github.com/repos/mrjackdee/JackDeeWebsiteAudit/contents/public-status/status.json?ref=v2-status-public-data';
 
 type Status = {
   project: string; lastUpdated: string; overallCompletion: number; goLiveStatus: string; goLiveReason: string;
@@ -20,10 +21,29 @@ type Status = {
   links: { documents: string; risks: string; slides: string; privatePreview: string };
 };
 
+type GitHubContentResponse = {
+  content?: string;
+  encoding?: string;
+};
+
 async function getStatus(): Promise<Status> {
-  const response = await fetch(`${STATUS_URL}?ts=${Date.now()}`, { cache: 'no-store' });
+  const response = await fetch(STATUS_API_URL, {
+    cache: 'no-store',
+    headers: {
+      Accept: 'application/vnd.github+json',
+      'X-GitHub-Api-Version': '2022-11-28',
+    },
+  });
+
   if (!response.ok) throw new Error('Project status is temporarily unavailable.');
-  return response.json();
+
+  const payload = (await response.json()) as GitHubContentResponse;
+  if (payload.encoding !== 'base64' || !payload.content) {
+    throw new Error('Project status is temporarily unavailable.');
+  }
+
+  const json = Buffer.from(payload.content.replace(/\n/g, ''), 'base64').toString('utf8');
+  return JSON.parse(json) as Status;
 }
 
 function ItemList({ values }: { values: string[] }) {
