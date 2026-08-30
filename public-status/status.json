@@ -1,6 +1,6 @@
 {
   "project": "mrjackdee.com Experience V2",
-  "lastUpdated": "2026-08-30T23:05:00Z",
+  "lastUpdated": "2026-08-30T23:32:00Z",
   "overallCompletion": 70,
   "goLiveStatus": "Not ready yet",
   "goLiveReason": "Two important verification controls remain open. The page-change continuity treatment still needs a fresh independent visual recheck. The corrected public sponsor dashboard now passes the delivery-team fresh-publication check, but separate independent confirmation is still required before that control closes.",
@@ -11,9 +11,9 @@
   "sponsorActionRequired": false,
   "sponsorAction": "No action required yet. The delivery team is closing the two remaining verification controls before final approval is requested.",
   "mustFixProblems": 0,
-  "importantProblems": 2,
+  "importantProblems": 1,
   "risks": 4,
-  "issues": 7,
+  "issues": 1,
   "completed": [
     "Verified completion remains at 70% after the client presentation passed rendered visual review and key release records were synchronized.",
     "Independent review confirmed the V2 visual language across the reviewed core routes.",
@@ -43,18 +43,16 @@
   ],
   "reviewFindings": [
     "No must-fix problem is open.",
-    "Two important verification items remain open.",
-    "The corrected page-change continuity treatment still needs fresh independent visual recheck before closure.",
-    "The public dashboard update path was corrected after the earlier stale-status behavior was isolated to how the dashboard read its sponsor-safe source.",
-    "A newly published 7:03 PM ET sponsor-safe status appeared immediately on the stable public dashboard in the delivery-team recheck.",
-    "The dashboard control remains open only for separate independent confirmation under the multi-agent review model.",
-    "The latest V2 branch deployment remains ready and no unresolved review comments are open on the branch.",
+    "One important experience problem remains open: the corrected page-change continuity treatment still needs fresh independent visual recheck before closure.",
+    "Independent quality review confirmed the corrected public sponsor dashboard now displays the current sponsor-safe status and returns a fresh no-cache/no-store response. The dashboard freshness control is closed.",
+    "The primary delivery narrative still refers to two verification controls. That statement is now materially out of date because the dashboard freshness control has passed independent confirmation. It should be corrected by the primary build agent rather than silently rewritten by this review.",
+    "A new medium sponsor-status accuracy issue was recorded because the dashboard label 'Current issues' was showing the total historical issue records rather than the active unresolved issue count.",
+    "The verified active issue count is now one: the sponsor-status count/label accuracy correction. This reporting issue does not change the website experience approval count.",
     "The broader V2 visual direction remains positive across the existing desktop, mobile, dark, light and differentiated case-study evidence.",
     "The sponsor-approved waiver of one additional live interaction session remains accepted residual risk and is not represented as a passed test."
   ],
   "blockers": [
-    "Final experience approval requires fresh independent visual recheck of the implemented page-change continuity correction.",
-    "Final status approval requires separate independent confirmation of the corrected sponsor dashboard freshness behavior."
+    "Final experience approval requires fresh independent visual recheck of the implemented page-change continuity correction."
   ],
   "links": {
     "dashboard": "https://jack-dee-website-audit.vercel.app/v2-status",
