@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export const revalidate = 60;
+export const dynamic = 'force-dynamic';
 
 const STATUS_URL = 'https://raw.githubusercontent.com/mrjackdee/JackDeeWebsiteAudit/v2-status-public-data/public-status/status.json';
 
@@ -21,7 +21,7 @@ type Status = {
 };
 
 async function getStatus(): Promise<Status> {
-  const response = await fetch(STATUS_URL, { next: { revalidate: 60 } });
+  const response = await fetch(STATUS_URL, { cache: 'no-store' });
   if (!response.ok) throw new Error('Project status is temporarily unavailable.');
   return response.json();
 }
