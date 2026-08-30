@@ -1,6 +1,6 @@
 {
   "project": "mrjackdee.com Experience V2",
-  "lastUpdated": "2026-08-30T21:34:00Z",
+  "lastUpdated": "2026-08-30T21:38:00Z",
   "overallCompletion": 70,
   "goLiveStatus": "Not ready yet",
   "goLiveReason": "The V2 experience remains stable and the client presentation has completed visual quality review. Two important verification controls remain open: the page-change continuity treatment still needs a fresh independent visual recheck, and the public sponsor dashboard currently matches the latest sponsor-safe status but still needs separate independent confirmation before final approval can be requested.",
@@ -11,7 +11,7 @@
   "sponsorActionRequired": false,
   "sponsorAction": "No action required yet. Final approval will be requested only after the two remaining independent verification checks are closed.",
   "mustFixProblems": 0,
-  "importantProblems": 1,
+  "importantProblems": 2,
   "risks": 4,
   "issues": 7,
   "completed": [
@@ -42,18 +42,19 @@
   ],
   "reviewFindings": [
     "No must-fix problem is open.",
-    "One important website verification problem remains open: the corrected page-change continuity treatment still needs fresh independent visual recheck before closure.",
-    "The public sponsor dashboard passed separate independent live confirmation at 5:34 PM ET and that synchronization control is closed.",
-    "The live dashboard matched the source that was current at the time of confirmation, including 70% completion, 0 must-fix problems, 2 important items, 4 risks, 6 issues and the 5:00 PM ET update.",
-    "After closing that dashboard control, the independently supported important-problem count is now one.",
-    "Some protected primary delivery narrative still says two verification controls remain. That narrative is now stale and has been recorded as a separate medium sponsor-status accuracy issue for the delivery orchestrator to correct; independent QA did not silently rewrite those build-owned fields.",
+    "Two important verification items remain open.",
+    "The corrected page-change continuity treatment still needs fresh independent visual recheck before closure.",
+    "The public sponsor dashboard briefly matched the then-current source at 5:34 PM ET, but that was not sufficient to close the synchronization control because the source was updated again during this review cycle.",
+    "Independent live rechecks at 5:37 PM ET and 5:38 PM ET still showed the earlier 5:00 PM ET snapshot with 2 important items and 6 issues while the current sponsor-safe source had been updated to 1 important item and 7 issues.",
+    "The dashboard synchronization control is therefore reopened until the live page consumes the latest sponsor-safe source and passes a fresh independent confirmation.",
+    "A separate medium sponsor-status accuracy issue is also open because protected primary delivery narrative still references two controls based on an earlier state; independent QA has challenged that mismatch rather than silently rewriting build-owned fields.",
     "The controlled visual evidence currently available is dated August 29, so it predates the page-change correction and cannot support closure of the remaining visual verification item.",
     "The broader V2 visual direction remains positive across desktop, mobile, dark, light and differentiated case-study evidence.",
     "The sponsor-approved waiver of one additional live interaction session remains accepted residual risk and is not represented as a passed test."
   ],
   "blockers": [
     "Final experience approval requires fresh independent visual recheck of the implemented page-change continuity correction.",
-    "Before final sponsor approval, the protected primary dashboard narrative should be refreshed to reflect that only one important website verification problem remains."
+    "Final status approval requires the live sponsor dashboard to consume the latest sponsor-safe source and then pass independent confirmation."
   ],
   "links": {
     "dashboard": "https://jack-dee-website-audit.vercel.app/v2-status",
