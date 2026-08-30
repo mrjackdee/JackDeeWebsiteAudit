@@ -21,7 +21,7 @@ type Status = {
 };
 
 async function getStatus(): Promise<Status> {
-  const response = await fetch(STATUS_URL, { cache: 'no-store' });
+  const response = await fetch(`${STATUS_URL}?ts=${Date.now()}`, { cache: 'no-store' });
   if (!response.ok) throw new Error('Project status is temporarily unavailable.');
   return response.json();
 }
