@@ -1,6 +1,6 @@
 {
   "project": "mrjackdee.com Experience V2",
-  "lastUpdated": "2026-08-30T01:58:00Z",
+  "lastUpdated": "2026-08-30T02:30:00Z",
   "overallCompletion": 60,
   "goLiveStatus": "Not ready yet",
   "goLiveReason": "Independent visual review has passed the corrected V2 experience, including dark and light views, site-wide scene language and the four flagship case studies. One important review item remains open: direct interaction on the hosted V2 website must still be independently completed before final approval.",
@@ -11,7 +11,7 @@
   "sponsorActionRequired": false,
   "sponsorAction": "No action needed from you right now.",
   "mustFixProblems": 0,
-  "importantProblems": 1,
+  "importantProblems": 2,
   "risks": 4,
   "issues": 4,
   "completed": [
@@ -40,17 +40,17 @@
   ],
   "reviewFindings": [
     "No must-fix problem is open.",
-    "One important problem remains open.",
-    "The shared website evidence remains accessible and has passed independent visual review.",
-    "The V2 design language remains materially present across the reviewed routes, and dark and light appearances are visually coherent on desktop and mobile.",
-    "The four flagship case studies remain meaningfully different in storytelling and proof presentation.",
-    "The latest hosted V2 preview remains ready and controlled review access is available.",
-    "The separate independent review environment still has not completed the required direct hosted interaction session, so the remaining interaction review is not complete.",
-    "The final important finding stays open until the independent reviewer records a direct hosted pass or return result.",
-    "No new website problem requiring sponsor action was identified in this review cycle."
+    "Two important problems are open.",
+    "The earlier visual approvals remain valid, including the site-wide V2 design language, dark and light presentation and differentiated flagship case studies.",
+    "The designated shared website evidence folder currently contains no review files when checked independently.",
+    "The designated shared quality-review evidence folder currently contains no review files when checked independently.",
+    "This means the final approval record cannot currently be independently reproduced from the required shared locations, so the evidence-access problem has been reopened.",
+    "The hosted V2 preview remains available through controlled access, but the separate direct interaction review still has not been completed in the independent review environment.",
+    "No new problem requiring sponsor action was identified in this review cycle."
   ],
   "blockers": [
-    "Final approval still requires the separate independent interaction result. The hosted preview is available, but the independent review environment still has not completed the required direct interaction session."
+    "Final approval still requires the separate independent interaction result. The hosted preview is available, but the independent review environment still has not completed the required direct interaction session.",
+    "The designated shared visual and quality-review evidence folders currently contain no review files. Those files need to be restored there so the final approval record can be independently checked again."
   ],
   "links": {
     "dashboard": "https://jack-dee-website-audit.vercel.app/v2-status",
