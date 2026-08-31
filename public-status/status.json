@@ -1,6 +1,6 @@
 {
   "project": "mrjackdee.com Experience V2",
-  "lastUpdated": "2026-08-31T10:00:00Z",
+  "lastUpdated": "2026-08-31T11:00:00Z",
   "overallCompletion": 90,
   "goLiveStatus": "Awaiting sponsor preview review and approval",
   "goLiveReason": "Independent experience quality review, final release records and sponsor approval packaging are complete. The sponsor must review the current V2 preview before giving explicit production approval.",
@@ -49,7 +49,7 @@
     "The broader V2 direction remains distinct from the approved reference sites while meeting the intended standard for story-led presentation, deliberate interaction and proof-focused polish.",
     "The sponsor-approved waiver of one additional live interaction session remains accepted residual risk and is not represented as a passed test.",
     "Release-control synchronization and sponsor approval packaging are complete.",
-    "The newest V2 preview deployment is READY and has no unresolved preview review comments. The protected preview still requires controlled sign-in access, so this cycle adds no new visual-verification claim.",
+    "The newest V2 preview deployment is READY, the protected preview returned the actual site shell successfully through the controlled access path, and there are no unresolved preview review comments. This cycle adds no new rendered visual-verification claim.",
     "The sponsor has not yet visually reviewed the preview, so explicit production approval remains pending."
   ],
   "blockers": [],
@@ -58,6 +58,6 @@
     "documents": "https://drive.google.com/drive/folders/1cJMSfkai5uzQRqEhDKfrlaFmZZzgYFCC",
     "risks": "https://docs.google.com/spreadsheets/d/10_kjKeGWC_vrwbOjfanUxA5oDSO13JlQ7c2SdQ3SfkA/edit",
     "slides": "https://docs.google.com/presentation/d/1y9aqTbMH1f7fehHv7IXUmg-f7DqRAWDV7I6HggoTDaA/edit",
-    "privatePreview": "https://mrjackdee-site-git-experience-rebuild-v2-mrjackdees-projects.vercel.app"
+    "privatePreview": "https://mrjackdee-site-e8bnd2tbv-mrjackdees-projects.vercel.app/?_vercel_share=Jz1MHDPUMzWrCppuQOcERkcR3t4EsBE8"
   }
 }
