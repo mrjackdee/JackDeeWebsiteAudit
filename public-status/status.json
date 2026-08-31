@@ -1,15 +1,15 @@
 {
   "project": "mrjackdee.com Experience V2",
-  "lastUpdated": "2026-08-31T05:00:00Z",
+  "lastUpdated": "2026-08-31T06:04:27Z",
   "overallCompletion": 90,
-  "goLiveStatus": "Awaiting sponsor approval",
-  "goLiveReason": "Independent experience quality review, final release records and sponsor approval packaging are complete. Explicit sponsor approval is required before any production change.",
-  "currentFocus": "Present the verified V2 experience and final approval package for an explicit sponsor go/no-go decision.",
+  "goLiveStatus": "Awaiting sponsor preview review and approval",
+  "goLiveReason": "Independent experience quality review, final release records and sponsor approval packaging are complete. The sponsor must review the current V2 preview before giving explicit production approval.",
+  "currentFocus": "Present the current V2 website preview and final approval package so the sponsor can review the experience before making a go/no-go decision.",
   "designCheckpoint": "The V2 creative direction has passed independent visual review across desktop, mobile, dark and light experiences. The corrected page-change continuity treatment and reduced-motion alternative also passed fresh independent rendered review. The client presentation completed rendered visual review.",
-  "nextMilestone": "Sponsor reviews the private V2 preview and complete approval set and provides an explicit go/no-go decision.",
-  "deliveryOutlook": "The V2 experience and release package are ready for sponsor review. Production remains unchanged until explicit approval is given.",
+  "nextMilestone": "Sponsor visually reviews the private V2 preview, then reviews the complete approval set and provides an explicit go/no-go decision.",
+  "deliveryOutlook": "The V2 experience and release package are ready for sponsor review. Production remains unchanged until explicit approval is given after preview review.",
   "sponsorActionRequired": true,
-  "sponsorAction": "Review the V2 preview and approval package and provide an explicit go/no-go decision. No production action will occur without approval.",
+  "sponsorAction": "Open and visually review the current V2 website preview first. Then review the approval package and provide an explicit go/no-go decision.",
   "mustFixProblems": 0,
   "importantProblems": 0,
   "risks": 4,
@@ -28,16 +28,17 @@
     "Created and filed the final release-control index in the controlled release-artifacts folder.",
     "Converted the sponsor approval package from working draft to final review package and reconciled the release readiness checklist.",
     "Corrected and independently confirmed the public sponsor dashboard freshness behavior.",
-    "Fresh pre-approval recheck confirmed the current V2 preview remains available and no new review finding emerged.",
+    "Corrected the Risks & Issues Log summary so the pending sponsor review and approval action is visible.",
     "Kept all V2 website work isolated from the current production website."
   ],
   "activeWork": [
-    "Presenting the complete V2 preview and approval package for sponsor review.",
+    "Presenting the current V2 preview and approval package for sponsor review.",
     "Holding production controls until an explicit sponsor decision is received."
   ],
   "nextActions": [
-    "Sponsor reviews the private V2 preview, approval package, Risks & Issues Log and client presentation.",
-    "Sponsor provides an explicit go/no-go decision.",
+    "Sponsor opens and visually reviews the private V2 preview.",
+    "Sponsor reviews the approval package, Risks & Issues Log and client presentation.",
+    "Sponsor provides an explicit go/no-go decision only after preview review.",
     "No merge to main or production deployment occurs without explicit approval."
   ],
   "reviewFindings": [
@@ -48,8 +49,8 @@
     "The broader V2 direction remains distinct from the approved reference sites while meeting the intended standard for story-led presentation, deliberate interaction and proof-focused polish.",
     "The sponsor-approved waiver of one additional live interaction session remains accepted residual risk and is not represented as a passed test.",
     "Release-control synchronization and sponsor approval packaging are complete.",
-    "The latest pre-approval recheck found no new must-fix or important experience problem.",
-    "The remaining decision is explicit sponsor approval before any production action."
+    "The sponsor has not yet visually reviewed the current V2 preview, so approval remains pending.",
+    "The remaining decision is explicit sponsor approval after preview review and before any production action."
   ],
   "blockers": [],
   "links": {
