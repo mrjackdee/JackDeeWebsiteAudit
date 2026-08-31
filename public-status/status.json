@@ -1,6 +1,6 @@
 {
   "project": "mrjackdee.com Experience V2",
-  "lastUpdated": "2026-08-31T12:00:00Z",
+  "lastUpdated": "2026-08-31T13:34:49Z",
   "overallCompletion": 90,
   "goLiveStatus": "Awaiting sponsor preview review and approval",
   "goLiveReason": "Independent experience quality review, final release records and sponsor approval packaging are complete. The sponsor must review the current V2 preview before giving explicit production approval.",
@@ -28,7 +28,6 @@
     "Created and filed the final release-control index in the controlled release-artifacts folder.",
     "Converted the sponsor approval package from working draft to final review package and reconciled the release readiness checklist.",
     "Corrected and independently confirmed the public sponsor dashboard freshness behavior.",
-    "Corrected the Risks & Issues Log summary so the pending sponsor review and approval action is visible.",
     "Kept all V2 website work isolated from the current production website."
   ],
   "activeWork": [
@@ -49,7 +48,7 @@
     "The broader V2 direction remains distinct from the approved reference sites while meeting the intended standard for story-led presentation, deliberate interaction and proof-focused polish.",
     "The sponsor-approved waiver of one additional live interaction session remains accepted residual risk and is not represented as a passed test.",
     "Release-control synchronization and sponsor approval packaging are complete.",
-    "At 8:00 AM ET, the newest V2 preview deployment was READY, the controlled protected preview returned the actual V2 site shell successfully, and there were no unresolved preview review comments. This cycle adds no new rendered visual-verification claim.",
+    "At 9:34 AM ET, the newest V2 preview deployment was READY, the protected preview returned the actual V2 site successfully, and there were no unresolved preview review comments. This cycle adds no new rendered visual-verification claim.",
     "The sponsor has not yet visually reviewed the preview, so explicit production approval remains pending."
   ],
   "blockers": [],
@@ -58,6 +57,6 @@
     "documents": "https://drive.google.com/drive/folders/1cJMSfkai5uzQRqEhDKfrlaFmZZzgYFCC",
     "risks": "https://docs.google.com/spreadsheets/d/10_kjKeGWC_vrwbOjfanUxA5oDSO13JlQ7c2SdQ3SfkA/edit",
     "slides": "https://docs.google.com/presentation/d/1y9aqTbMH1f7fehHv7IXUmg-f7DqRAWDV7I6HggoTDaA/edit",
-    "privatePreview": "https://mrjackdee-site-kp59sxegg-mrjackdees-projects.vercel.app/?_vercel_share=TWJCJ0S7esJu43ppZ71FRLRdiyQqVqmL"
+    "privatePreview": "https://mrjackdee-site-5yk7uqf1p-mrjackdees-projects.vercel.app/?_vercel_share=yjVl8I8Q8PpurVGuIF95QEuTaChbIjJ5"
   }
 }
